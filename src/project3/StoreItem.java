@@ -48,10 +48,10 @@ public class StoreItem {
 	@Override
 	public String toString() {
 		
-		return String.format("%-10s %s%n%-9s %s%n%-10s %s%n%-10s %s%n", 
+		return String.format("%-12s %s%n%-12s %s%n%-12s %s%n%-12s %s%n", 
 			"Item no:", getItemNo(), 
-			"Item description:", getItemDescription(),
-			"Units in inventory:", getUnitsInInventory(),
+			"Description:", getItemDescription(),
+			"Units:", getUnitsInInventory(),
 			"Price:", String.format("%.2f", getPrice()));
 		
 	}// end toString method
