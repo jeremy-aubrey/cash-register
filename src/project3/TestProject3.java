@@ -1,10 +1,16 @@
 package project3;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TestProject3 {
@@ -14,9 +20,14 @@ public class TestProject3 {
 		obj.developerInfo();
 		
 		File inventoryFile = obj.getInventoryFile();
+		List<StoreItem> itemsList = obj.getItems(inventoryFile);
 		
-		CashRegister register = new CashRegister();
-		register.displayMenu();
+		for(StoreItem item : itemsList) {
+			System.out.println(item);
+		}
+		
+//		CashRegister register = new CashRegister();
+//		register.displayMenu();
 	}
 	
 	public File getInventoryFile() {
@@ -48,6 +59,63 @@ public class TestProject3 {
 		
 		input.close();
 		return inventoryFile;
+	}
+	
+	public List<StoreItem> getItems(File inventoryFile) {
+		
+		List<StoreItem> itemList = new ArrayList<StoreItem>();
+		
+		try {
+			
+			BufferedReader reader = new BufferedReader(new FileReader(inventoryFile));
+			
+			try {
+				
+				String line = reader.readLine();
+				while(line != null) {
+					String[] itemData = line.replaceAll("\\s+", ",").split(",");
+					if(itemData.length == 4) {
+						StoreItem item = new StoreItem(
+								Integer.parseInt(itemData[0]), 
+								itemData[1], 
+								Integer.parseInt(itemData[2]), 
+								Double.parseDouble(itemData[3]));
+						
+						itemList.add(item);
+					}
+					line = reader.readLine();
+				}
+				System.out.println(itemList.size() + " items added...");
+				
+				if(reader != null) {
+					reader.close();
+				}
+				
+			} catch (IOException e) {
+				System.out.println("Error reading file:");
+				System.out.println(e.getMessage());
+			}
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("Error reading file:");
+			System.out.println(e.getMessage());
+		}
+		
+		return itemList;
+	}
+	
+	public static String[] getArray(String string) {
+	
+			return string.replaceAll("\\s+", ",").split(",");
+	}
+	
+	// DEV ONLY - REMOVE
+	public static void printArr(String[] arr) {
+		System.out.print("[ ");
+		for(String item : arr) {
+			System.out.print(item + " ");
+		}
+		System.out.println("]");
 	}
 	
    //***************************************************************
