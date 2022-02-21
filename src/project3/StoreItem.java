@@ -7,8 +7,8 @@ public class StoreItem {
 	private String itemDescription;
 	private double price;
 	
-	public StoreItem(int itemNo, String itemDescription, int units, double price) 
-	{	
+	public StoreItem(int itemNo, String itemDescription, int units, double price) {
+		
 		//ensure non-negative item number
 		if(itemNo > 0) {
 			this.itemNo = itemNo;
@@ -28,5 +28,33 @@ public class StoreItem {
 		//increment the class inventory count
 		this.unitsInInventory = units;
 	}
+	
+	public static int getUnitsInInventory() {
+		return unitsInInventory;
+	}
+
+	public int getItemNo() {
+		return itemNo;
+	}
+
+	public String getItemDescription() {
+		return itemDescription;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	@Override
+	public String toString() {
+		
+		return String.format("%-10s %s%n%-9s %s%n%-10s %s%n%-10s %s%n", 
+			"Item no:", getItemNo(), 
+			"Item description:", getItemDescription(),
+			"Units in inventory:", getUnitsInInventory(),
+			"Price:", String.format("%.2f", getPrice()));
+		
+	}// end toString method
+	
 
 }
