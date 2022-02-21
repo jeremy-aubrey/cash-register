@@ -7,7 +7,7 @@ public class StoreItem {
 	private String itemDescription;
 	private double price;
 	
-	public StoreItem(int itemNo, String itemDescription, double price) 
+	public StoreItem(int itemNo, String itemDescription, int units, double price) 
 	{	
 		//ensure non-negative item number
 		if(itemNo > 0) {
@@ -26,7 +26,7 @@ public class StoreItem {
 		this.itemDescription = itemDescription;
 		
 		//increment the class inventory count
-		unitsInInventory++;
+		this.unitsInInventory = units;
 	}
 
 }
