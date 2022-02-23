@@ -39,19 +39,24 @@ public class CashRegister {
 		return 0.0;
 	};
 
-	public void purchaseItem(StoreItem item) 
+	public void purchaseItem(StoreItem item, int quantity) 
 	{
 		if(item != null) {
+			boolean inStock = decrementQuantity(item.getItemNo(), quantity);
+			if(inStock) {
 			selectedItems.add(new StoreItem(item.getItemNo(), 
 					item.getItemDescription(),
-					1,
+					quantity,
 					item.getPrice()
 					));
-			
-			decrementQuantity(item.getItemNo(), 1);
-			System.out.println("");
-			System.out.println("Item added: " + item.getItemDescription());
-			System.out.println("");
+				System.out.println("");
+				System.out.println("Item added: " + item.getItemDescription());
+				System.out.println("");
+			} else {
+				System.out.println("");
+				System.out.println("Unable to purchase: " + quantity + " " + item.getItemDescription());
+				System.out.println("");
+			}
 		}
 	};
 	
