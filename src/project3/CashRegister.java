@@ -42,7 +42,7 @@ public class CashRegister {
 	public void purchaseItem(StoreItem item, int quantity) 
 	{
 		if(item != null) {
-			boolean inStock = decrementQuantity(item.getItemNo(), quantity);
+			boolean inStock = decrementInventory(item.getItemNo(), quantity);
 			if(inStock) {
 			selectedItems.add(new StoreItem(item.getItemNo(), 
 					item.getItemDescription(),
@@ -61,18 +61,33 @@ public class CashRegister {
 	};
 	
 	
-	private boolean decrementQuantity(int itemNo, int quantity) {
+	private boolean decrementInventory(int itemNo, int quantity) {
 		boolean updated = false;
 		for(StoreItem item : inventoryList) {
-			if(itemNo == item.getItemNo() && quantity <= item.getUnitsInInventory()) {
-				int newQty = item.getUnitsInInventory() - quantity;
-				item.setUnitsInInventory(newQty);
+			if(itemNo == item.getItemNo() && quantity <= item.getUnits()) {
+				int newQty = item.getUnits() - quantity;
+				item.setUnits(newQty);
 				updated = true;
 			}
 		}
 		
 		return updated;
 	}
+	
+	private boolean incrementInventory(int itemNo, int quantity) {
+		boolean updated = false;
+		for(StoreItem item : inventoryList) {
+			if(itemNo == item.getItemNo()) {
+				int newQty = item.getUnits() + quantity;
+				item.setUnits(newQty);
+				updated = true;
+			}
+		}
+		
+		return updated;
+	}
+	
+	
 	
 	public void showItems()
 	{	
@@ -87,9 +102,12 @@ public class CashRegister {
 		}	
 	};
 	
-	private void clearRegister()
+	public void clearRegister()
 	{
-		
+		for(StoreItem item : selectedItems) {
+			incrementInventory(item.getItemNo(), item.getUnits());
+		}
+		selectedItems.clear();
 	};
 	
 	public void showInventory()
