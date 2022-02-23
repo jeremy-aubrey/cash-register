@@ -5,40 +5,49 @@ import java.util.List;
 
 public class CashRegister {
 	
-	List<StoreItem> itemsList;
+	private List<StoreItem> selectedItems;
+	private List<StoreItem> inventoryList;
 	
-	public CashRegister() 
+	public CashRegister(List inventoryList) 
 	{
-		itemsList = new ArrayList<StoreItem>();
+		selectedItems = new ArrayList<StoreItem>();
+		this.inventoryList = inventoryList; 
 	}
 	
-	public void displayMenu(List<StoreItem> itemsList)
+	public void displayMenu()
 	{
-		System.out.println("=========");
-		System.out.println("MAIN MENU");
-		System.out.println("=========");
-		
-		System.out.println("Available items:");
-		for(StoreItem item : itemsList) {
-			System.out.println(" - " + item.getItemDescription());
-		}
-		
 		
 	};
+	
+	private void printHeader(String content) {
+		System.out.println("-------------------------------------");
+		System.out.println(content.toUpperCase());
+		System.out.println("-------------------------------------");
+	}
 	
 	public double getTotal() 
 	{
 		return 0.0;
 	};
-	
+
 	public void purchaseItem(StoreItem item) 
 	{
-		
+		if(item != null) {
+			selectedItems.add(item);
+			System.out.println("Item added: " + item.getItemDescription());
+		}
 	};
 	
 	public void showItems()
-	{
-		
+	{	
+		printHeader("register items");
+		if(!selectedItems.isEmpty()) {
+			for(StoreItem item : selectedItems) {
+				System.out.println(item);
+			}
+		} else {
+			System.out.println("< NO ITEMS >");
+		}	
 	};
 	
 	private void clearRegister()
@@ -46,9 +55,18 @@ public class CashRegister {
 		
 	};
 	
-	private void showInventory()
+	public void showInventory()
 	{
-		
+		printHeader("store inventory");
+		System.out.printf("%-8s%-15s%-8s%-10s%n", 
+				"ItemNo",
+				"Description",
+				"Units",
+				"Price");
+		System.out.println("-------------------------------------");
+		for(StoreItem item : inventoryList) {
+			System.out.println(item);
+		}
 	};
 	
 	public boolean checkOut()
