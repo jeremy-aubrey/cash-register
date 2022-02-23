@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TestProject3 {
+	
+	private static Scanner input = new Scanner(System.in);
+	
 	public static void main(String[] args) {
 		
 		TestProject3 obj = new TestProject3();
@@ -22,18 +25,23 @@ public class TestProject3 {
 		File inventoryFile = obj.getInventoryFile();
 		List<StoreItem> itemsList = obj.getItems(inventoryFile);
 		
+		CashRegister register = new CashRegister(itemsList);
+		
 		for(StoreItem item : itemsList) {
-			System.out.println(item);
+			register.purchaseItem(item, 2);
 		}
 		
-//		CashRegister register = new CashRegister();
-//		register.displayMenu();
+		register.showItems();
+		register.showInventory();
+		register.checkOut();
+		
+		input.close();
 	}
 	
 	public File getInventoryFile() {
 		
 		File inventoryFile = null;
-		Scanner input = new Scanner(System.in);
+		
 		System.out.println("Enter an inventory file path:");
 		Path path = null;
 	
@@ -57,7 +65,6 @@ public class TestProject3 {
 			System.out.println(e.getMessage());
 		}
 		
-		input.close();
 		return inventoryFile;
 	}
 	
@@ -85,7 +92,7 @@ public class TestProject3 {
 					}
 					line = reader.readLine();
 				}
-				System.out.println(itemList.size() + " items added...");
+				System.out.println("[ " + itemList.size() + " ITEMS ADDED ]");
 				
 				if(reader != null) {
 					reader.close();
@@ -102,20 +109,6 @@ public class TestProject3 {
 		}
 		
 		return itemList;
-	}
-	
-	public static String[] getArray(String string) {
-	
-			return string.replaceAll("\\s+", ",").split(",");
-	}
-	
-	// DEV ONLY - REMOVE
-	public static void printArr(String[] arr) {
-		System.out.print("[ ");
-		for(String item : arr) {
-			System.out.print(item + " ");
-		}
-		System.out.println("]");
 	}
 	
    //***************************************************************
