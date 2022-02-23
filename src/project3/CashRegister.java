@@ -1,5 +1,7 @@
 package project3;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +36,17 @@ public class CashRegister {
 		System.out.println("-------------------------------------");
 	}
 	
-	public double getTotal() 
+	public String getTotal() 
 	{
-		return 0.0;
+		double total = 0.00;
+		
+		if(!selectedItems.isEmpty()) {
+			total = selectedItems.stream()
+			.mapToDouble(item -> item.getPrice() * item.getUnits())
+			.sum();
+		} 
+		
+		return String.format("%.2f", total);
 	};
 
 	public void purchaseItem(StoreItem item, int quantity) 
