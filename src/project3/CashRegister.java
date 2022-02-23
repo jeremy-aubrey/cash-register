@@ -42,10 +42,32 @@ public class CashRegister {
 	public void purchaseItem(StoreItem item) 
 	{
 		if(item != null) {
-			selectedItems.add(item);
+			selectedItems.add(new StoreItem(item.getItemNo(), 
+					item.getItemDescription(),
+					1,
+					item.getPrice()
+					));
+			
+			decrementQuantity(item.getItemNo(), 1);
+			System.out.println("");
 			System.out.println("Item added: " + item.getItemDescription());
+			System.out.println("");
 		}
 	};
+	
+	
+	private boolean decrementQuantity(int itemNo, int quantity) {
+		boolean updated = false;
+		for(StoreItem item : inventoryList) {
+			if(itemNo == item.getItemNo() && quantity <= item.getUnitsInInventory()) {
+				int newQty = item.getUnitsInInventory() - quantity;
+				item.setUnitsInInventory(newQty);
+				updated = true;
+			}
+		}
+		
+		return updated;
+	}
 	
 	public void showItems()
 	{	
