@@ -2,7 +2,7 @@ package project3;
 
 public class StoreItem {
 	
-	private static int unitsInInventory;
+	private int units;
 	private int itemNo;
 	private String itemDescription;
 	private double price;
@@ -26,11 +26,15 @@ public class StoreItem {
 		this.itemDescription = itemDescription;
 		
 		//increment the class inventory count
-		this.unitsInInventory = units;
+		this.units = units;
 	}
 	
-	public static int getUnitsInInventory() {
-		return unitsInInventory;
+	public int getUnits() {
+		return units;
+	}
+	
+	public void setUnits(int quantity) {
+		units = quantity;
 	}
 
 	public int getItemNo() {
@@ -48,11 +52,11 @@ public class StoreItem {
 	@Override
 	public String toString() {
 		
-		return String.format("%-12s %s%n%-12s %s%n%-12s %s%n%-12s %s%n", 
-			"Item no:", getItemNo(), 
-			"Description:", getItemDescription(),
-			"Units:", getUnitsInInventory(),
-			"Price:", String.format("%.2f", getPrice()));
+		return String.format("%-8s%-15s%-8s%-10s", 
+			getItemNo(), 
+			getItemDescription(),
+			getUnits(),
+			String.format("%.2f", getPrice()));
 		
 	}// end toString method
 	
