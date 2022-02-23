@@ -25,6 +25,15 @@ public class CashRegister {
 		System.out.println("-------------------------------------");
 	}
 	
+	private void printColumns() {
+		System.out.printf("%-8s%-15s%-8s%-10s%n", 
+				"ItemNo",
+				"Description",
+				"Qty",
+				"Price");
+		System.out.println("-------------------------------------");
+	}
+	
 	public double getTotal() 
 	{
 		return 0.0;
@@ -41,6 +50,7 @@ public class CashRegister {
 	public void showItems()
 	{	
 		printHeader("register items");
+		printColumns();
 		if(!selectedItems.isEmpty()) {
 			for(StoreItem item : selectedItems) {
 				System.out.println(item);
@@ -58,12 +68,7 @@ public class CashRegister {
 	public void showInventory()
 	{
 		printHeader("store inventory");
-		System.out.printf("%-8s%-15s%-8s%-10s%n", 
-				"ItemNo",
-				"Description",
-				"Units",
-				"Price");
-		System.out.println("-------------------------------------");
+		printColumns();
 		for(StoreItem item : inventoryList) {
 			System.out.println(item);
 		}
