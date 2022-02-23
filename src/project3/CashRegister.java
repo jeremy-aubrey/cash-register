@@ -62,14 +62,7 @@ public class CashRegister {
 					quantity,
 					item.getPrice()
 					));
-				System.out.println("");
-				System.out.println("Item added: " + item.getItemDescription());
-				System.out.println("");
-			} else {
-				System.out.println("");
-				System.out.println("Unable to purchase: " + quantity + " " + item.getItemDescription());
-				System.out.println("");
-			}
+			} 
 		}
 	};
 	
