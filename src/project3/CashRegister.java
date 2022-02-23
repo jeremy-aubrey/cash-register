@@ -1,14 +1,16 @@
 package project3;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CashRegister {
 	
 	private List<StoreItem> selectedItems;
 	private List<StoreItem> inventoryList;
+	private double taxRate = 0.0825;
 	
 	public CashRegister(List inventoryList) 
 	{
@@ -39,6 +41,7 @@ public class CashRegister {
 	public String getTotal() 
 	{
 		double total = 0.00;
+		DecimalFormat df = new DecimalFormat("0.00");
 		
 		if(!selectedItems.isEmpty()) {
 			total = selectedItems.stream()
@@ -46,7 +49,7 @@ public class CashRegister {
 			.sum();
 		} 
 		
-		return String.format("%.2f", total);
+		return df.format(total);
 	};
 
 	public void purchaseItem(StoreItem item, int quantity) 
@@ -129,10 +132,28 @@ public class CashRegister {
 		}
 	};
 	
-	public boolean checkOut()
+	public void checkOut()
 	{
-		return true;
+		printHeader("checkout");
+		String items = selectedItems.stream()
+		.sorted(Comparator.comparing(StoreItem::getItemDescription))
+		.map(StoreItem::toString)
+		.collect(Collectors.joining("\n"));
+		
+		System.out.println(items);
+		
+		double itemsTotal = Double.parseDouble(getTotal());
+		double taxes = itemsTotal * taxRate;
+		double taxedTotal = itemsTotal + taxes;
+		DecimalFormat df = new DecimalFormat("0.00");
+
+		String totals = String.format("%n%-31s%-10s%n%-31s%-10s%n%-31s%-10s%n%-31s%-10s%n", 
+				"Subtotal", df.format(itemsTotal),
+				"Tax rate:", (taxRate * 100) + "%",
+				"Total taxes:", df.format(taxes),
+				"Total:", df.format(taxedTotal));
+		
+		System.out.println(totals);
 	};
 	
-
 }
