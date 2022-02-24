@@ -101,7 +101,7 @@ public class CashRegister {
 				quit = true;
 				break;
 			default:
-				System.out.println("Enter a number");
+				System.out.println("Choose an option or negative number to quit");
 		}
 		
 		return quit;
