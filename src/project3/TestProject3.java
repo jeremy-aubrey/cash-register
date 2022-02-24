@@ -27,17 +27,11 @@ public class TestProject3 {
 		
 		CashRegister register = new CashRegister(itemsList);
 		
-		for(StoreItem item : itemsList) {
-			register.purchaseItem(item, 2);
-		}
-		
-		register.showItems();
-		register.showInventory();
-		register.checkOut();
+		register.displayMenu();
 		
 		input.close();
 	}
-	
+
 	public File getInventoryFile() {
 		
 		File inventoryFile = null;
@@ -92,7 +86,7 @@ public class TestProject3 {
 					}
 					line = reader.readLine();
 				}
-				System.out.println("[ " + itemList.size() + " ITEMS ADDED ]");
+				System.out.println("[ " + itemList.size() + " ITEMS UPLOADED ]");
 				
 				if(reader != null) {
 					reader.close();
