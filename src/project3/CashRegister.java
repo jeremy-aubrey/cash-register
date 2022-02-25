@@ -31,6 +31,7 @@ public class CashRegister {
 						item.getItemDescription(),
 						"["+(i+1)+"]");
 			}
+			System.out.println("\n[ USE NEGATIVE NUMBER TO EXIT ]");
 			
 			int selection = getUserSelection("\nEnter item: ");
 			int quantity = getUserSelection("Enter quantity: ");
@@ -52,12 +53,13 @@ public class CashRegister {
 		while(!quit) {
 			
 			System.out.println("\n[ " + "MENU OPTIONS" + " ]");
-			System.out.printf("%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n",
+			System.out.printf("%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%n%-20s%n",
 					"Select Items", "[1]",
 					"Show Cash Register", "[2]",
 					"Clear Cash Register", "[3]",
 					"Show Inventory", "[4]",
-					"Check Out", "[5]");
+					"Check Out", "[5]",
+					"[ USE NEGATIVE NUMBER TO EXIT ]");
 			quit = dispatchAction();
 		}
 		
@@ -141,14 +143,14 @@ public class CashRegister {
 		if(item != null) {
 			boolean inStock = decrementInventory(item.getItemNo(), quantity);
 			if(inStock) {
-				System.out.println("PURCHASING ITEM");
+				System.out.println("[ PURCHASING ITEM ] : " + item.getItemDescription());
 				selectedItems.add(new StoreItem(item.getItemNo(), 
 					item.getItemDescription(),
 					quantity,
 					item.getPrice()
 					));
 			} else {
-				System.out.println("INSUFFICIENT STOCK");
+				System.out.println("[ INSUFFICIENT STOCK ] : " + item.getUnits());
 			}
 		}
 	};
