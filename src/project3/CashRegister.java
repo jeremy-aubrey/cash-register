@@ -13,6 +13,7 @@ public class CashRegister {
 	private List<StoreItem> inventoryList;
 	private double taxRate = 0.0825;
 	private Scanner userIn = new Scanner(System.in);
+	String errorMsg = "";
 	
 	public CashRegister(List<StoreItem> inventoryList) 
 	{
@@ -237,5 +238,13 @@ public class CashRegister {
 		
 		System.out.println(totals);
 	};
+	
+	private void getErrorMsg() {
+		System.out.println(errorMsg);
+	}
+	
+	private void setErrorMsg(String msg) {
+		this.errorMsg = "[ " + msg + " ]";
+	}
 	
 }
