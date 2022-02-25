@@ -111,7 +111,6 @@ public class CashRegister {
 				break;
 			case 5:
 				checkOut();
-				quit = true;
 				break;
 			case 6: //quit
 				System.out.println("Good bye");
@@ -229,7 +228,7 @@ public class CashRegister {
 		}
 	};
 	
-	public boolean checkOut()
+	public void checkOut()
 	{
 		boolean accept = false;
 		printHeader("checkout");
@@ -257,35 +256,30 @@ public class CashRegister {
 		if(choice.equals("Y")) {
 			String recieptData = items.concat("\n" + totals);
 			getReciept(recieptData);
-		} else {
-			displayMenu();
-		}
-		
-		return accept;
-		
+		} 
 	};
 	
 	private void getReciept(String receiptData) {
 		//get receipt path
-		File reciept = getFile("receipt");
+		File receiptPath = getFile("receipt");
 		
-		//populate with data (write)
-		try {
-			FileWriter fw = new FileWriter(reciept);
-			fw.write("SALES RECEIPT\n");
-			fw.write("-------------------------------------\n");
-			fw.write(receiptData);
-			fw.write("-------------------------------------\n");
-			fw.write("THANK YOU FOR SHOPPING WITH US");
-			System.out.println("\n[ GENERATING RECEIPT ]");
-			fw.close();
-			displayMenu();
-			
-		} catch (IOException e) {
-			System.out.println("\n[ ERROR GENERATING RECEIPT ]");
-			displayMenu();
-		}
-		
+		if(receiptPath != null) {
+			//populate with data (write)
+			try {
+				FileWriter fw = new FileWriter(receiptPath);
+				fw.write("SALES RECEIPT\n");
+				fw.write("-------------------------------------\n");
+				fw.write(receiptData);
+				fw.write("-------------------------------------\n");
+				fw.write("THANK YOU FOR SHOPPING WITH US");
+				System.out.println("\n[ GENERATING RECEIPT ]");
+				fw.close();
+				
+			} catch (IOException e) {
+				System.out.println("\n[ ERROR GENERATING RECEIPT ]");
+
+			}
+		} 	
 	}
 	
 	public File getFile(String type) {
@@ -306,13 +300,11 @@ public class CashRegister {
 				System.out.println("Using: " + path);
 			} else {
 				System.out.println("\n[ FILE EXISTS, USE ANOTHER PATH ]");
-				displayMenu();
 			}
 			
 		} catch (InvalidPathException | SecurityException | NullPointerException e) {
 			System.out.print("\n[ ILLEGAL FILE PATH ]: ");
 			System.out.println(e.getMessage());
-			displayMenu();
 		}
 		
 		return file;
