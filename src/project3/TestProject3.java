@@ -22,7 +22,7 @@ public class TestProject3 {
 		TestProject3 obj = new TestProject3();
 		obj.developerInfo();
 		
-		File inventoryFile = obj.getInventoryFile();
+		File inventoryFile = obj.getFile("inventory");
 		List<StoreItem> itemsList = obj.getItems(inventoryFile);
 		
 		CashRegister register = new CashRegister(itemsList);
@@ -32,11 +32,11 @@ public class TestProject3 {
 		input.close();
 	}
 
-	public File getInventoryFile() {
+	public File getFile(String type) {
 		
-		File inventoryFile = null;
+		File file = null;
 		
-		System.out.println("Enter an inventory file path:");
+		System.out.println("Enter an " + type + " file path:");
 		Path path = null;
 	
 		//get legal path
@@ -48,18 +48,16 @@ public class TestProject3 {
 			
 			//instantiate File if its readable
 			if(exists && isReadable && !isDirectory) {
-				inventoryFile = new File(path.toString());
+				file = new File(path.toString());
 				System.out.println("Using: " + path);
-			} else {
-				System.out.println("Unable to read file");
-			}
+			} 
 			
 		} catch (InvalidPathException | SecurityException | NullPointerException e) {
 			System.out.println("Illegal path:");
 			System.out.println(e.getMessage());
 		}
 		
-		return inventoryFile;
+		return file;
 	}
 	
 	public List<StoreItem> getItems(File inventoryFile) {
@@ -97,9 +95,8 @@ public class TestProject3 {
 				System.out.println("[ NO ITEMS UPLOADED ]");
 			}
 			
-		} catch (FileNotFoundException e) {
-			System.out.println("Error reading file:");
-			System.out.println(e.getMessage());
+		} catch (FileNotFoundException | NullPointerException e) {
+			System.out.print("[ FILE NOT FOUND ]\n");
 		}
 		
 		return itemList;
