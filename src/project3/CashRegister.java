@@ -1,5 +1,12 @@
 package project3;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -222,15 +229,14 @@ public class CashRegister {
 		}
 	};
 	
-	public void checkOut()
+	public boolean checkOut()
 	{
+		boolean accept = false;
 		printHeader("checkout");
 		String items = selectedItems.stream()
 		.sorted(Comparator.comparing(StoreItem::getItemDescription))
 		.map(StoreItem::toString)
 		.collect(Collectors.joining("\n"));
-		
-		System.out.println(items);
 		
 		double itemsTotal = Double.parseDouble(getTotal());
 		double taxes = itemsTotal * taxRate;
@@ -243,8 +249,76 @@ public class CashRegister {
 				"Total taxes:", df.format(taxes),
 				"Total:", df.format(taxedTotal));
 		
+		System.out.println(items);
 		System.out.println(totals);
+		printHeader("proceed ? y (yes) | any other key (no)");
+		String choice = userIn.nextLine().toUpperCase();
+		
+		if(choice.equals("Y")) {
+			String recieptData = items.concat("\n" + totals);
+			getReciept(recieptData);
+		} else {
+			displayMenu();
+		}
+		
+		return accept;
+		
 	};
+	
+	private void getReciept(String receiptData) {
+		//get receipt path
+		File reciept = getFile("receipt");
+		
+		//populate with data (write)
+		try {
+			FileWriter fw = new FileWriter(reciept);
+			fw.write("SALES RECEIPT\n");
+			fw.write("-------------------------------------\n");
+			fw.write(receiptData);
+			fw.write("-------------------------------------\n");
+			fw.write("THANK YOU FOR SHOPPING WITH US");
+			System.out.println("\n[ GENERATING RECEIPT ]");
+			fw.close();
+			displayMenu();
+			
+		} catch (IOException e) {
+			System.out.println("\n[ ERROR GENERATING RECEIPT ]");
+			displayMenu();
+		}
+		
+	}
+	
+	public File getFile(String type) {
+		
+		File file = null;
+		
+		System.out.println("Enter an " + type + " file path:");
+		Path path = null;
+	
+		//get legal path
+		try {
+			path = Paths.get(userIn.nextLine().trim());
+			boolean exists = Files.exists(path);
+			
+			//instantiate File if its readable
+			if(!exists) {
+				file = new File(path.toString());
+				System.out.println("Using: " + path);
+			} else {
+				System.out.println("\n[ FILE EXISTS, USE ANOTHER PATH ]");
+				displayMenu();
+			}
+			
+		} catch (InvalidPathException | SecurityException | NullPointerException e) {
+			System.out.print("\n[ ILLEGAL FILE PATH ]: ");
+			System.out.println(e.getMessage());
+			displayMenu();
+		}
+		
+		return file;
+	}
+	
+	
 
 	
 }
