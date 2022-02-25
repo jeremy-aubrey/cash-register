@@ -25,32 +25,36 @@ public class CashRegister {
 		boolean quit = false;
 		int selection = 0;
 		int quantity = 0;
-		
-		while(!quit) {
-			System.out.println("\n[ " + "SELECT AN ITEM" + " ]");
-			for(int i = 0; i < inventoryList.size(); i++) {
-				StoreItem item = inventoryList.get(i);
-				System.out.printf("%-20s%-5s%n",
-						item.getItemDescription(),
-						"["+(i+1)+"]");
-			}
-			System.out.println("\n[ USE NEGATIVE NUMBER TO EXIT ]");
+		if(!inventoryList.isEmpty()) {
 			
-			selection = getUserSelection("\nEnter item: ");
-			if(selection != 0) {
-				quantity = getUserSelection("Enter quantity: ");
-			}
-			
-			if(selection > 0 && selection <= inventoryList.size() && quantity > 0) {
+			while(!quit) {
+				System.out.println("\n[ SELECT AN ITEM ]");
+				for(int i = 0; i < inventoryList.size(); i++) {
+					StoreItem item = inventoryList.get(i);
+					System.out.printf("%-20s%-5s%n",
+							item.getItemDescription(),
+							"["+(i+1)+"]");
+				}
+				System.out.println("\n[ USE NEGATIVE NUMBER TO EXIT ]");
 				
-				StoreItem item = inventoryList.get(selection - 1); //convert to index
-				purchaseItem(item, quantity);
+				selection = getUserSelection("\nEnter item: ");
+				if(selection != 0) {
+					quantity = getUserSelection("Enter quantity: ");
+				}
 				
-			} else if (selection < 0 || quantity < 0) {
-				quit = true;
+				if(selection > 0 && selection <= inventoryList.size() && quantity > 0) {
+					
+					StoreItem item = inventoryList.get(selection - 1); //convert to index
+					purchaseItem(item, quantity);
+					
+				} else if (selection < 0 || quantity < 0) {
+					quit = true;
+				}
 			}
-			
+		} else {
+			System.out.println("\n[ NO ITEMS FOUND ]");
 		}
+		
 	}
 	
 	public void displayMenu() {
