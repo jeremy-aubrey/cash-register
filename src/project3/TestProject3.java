@@ -92,9 +92,9 @@ public class TestProject3 {
 					reader.close();
 				}
 				
-			} catch (IOException e) {
-				System.out.println("Error reading file:");
-				System.out.println(e.getMessage());
+			} catch (IOException | NumberFormatException e) {
+				System.out.print("[ ERROR READING FILE ]: " + e.getMessage() + "\n");
+				System.out.println("[ NO ITEMS UPLOADED ]");
 			}
 			
 		} catch (FileNotFoundException e) {
