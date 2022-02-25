@@ -13,7 +13,6 @@ public class CashRegister {
 	private List<StoreItem> inventoryList;
 	private double taxRate = 0.0825;
 	private Scanner userIn = new Scanner(System.in);
-	String errorMsg = "";
 	
 	public CashRegister(List<StoreItem> inventoryList) 
 	{
@@ -24,6 +23,9 @@ public class CashRegister {
 	public void selectItems()
 	{
 		boolean quit = false;
+		int selection = 0;
+		int quantity = 0;
+		
 		while(!quit) {
 			System.out.println("\n[ " + "SELECT AN ITEM" + " ]");
 			for(int i = 0; i < inventoryList.size(); i++) {
@@ -34,8 +36,10 @@ public class CashRegister {
 			}
 			System.out.println("\n[ USE NEGATIVE NUMBER TO EXIT ]");
 			
-			int selection = getUserSelection("\nEnter item: ");
-			int quantity = getUserSelection("Enter quantity: ");
+			selection = getUserSelection("\nEnter item: ");
+			if(selection != 0) {
+				quantity = getUserSelection("Enter quantity: ");
+			}
 			
 			if(selection > 0 && selection <= inventoryList.size() && quantity > 0) {
 				
@@ -53,14 +57,14 @@ public class CashRegister {
 		boolean quit = false;
 		while(!quit) {
 			
-			System.out.println("\n[ " + "MENU OPTIONS" + " ]");
-			System.out.printf("%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%n%-20s%n",
+			System.out.println("\n[ MENU OPTIONS ]");
+			System.out.printf("%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n%-20s%-5s%n",
 					"Select Items", "[1]",
 					"Show Cash Register", "[2]",
 					"Clear Cash Register", "[3]",
 					"Show Inventory", "[4]",
 					"Check Out", "[5]",
-					"[ USE NEGATIVE NUMBER TO EXIT ]");
+					"Quit", "[6]");
 			quit = dispatchAction();
 		}
 		
@@ -81,7 +85,6 @@ public class CashRegister {
 	private boolean dispatchAction() {
 		boolean quit = false;
 		int selection = getUserSelection("\nEnter selection: ");
-		if(selection < 0) selection = 6; //user quits
 		switch(selection) {
 			case 1: 
 				selectItems(); //select items
@@ -104,7 +107,7 @@ public class CashRegister {
 				quit = true;
 				break;
 			default:
-				System.out.println("Choose an option or negative number to quit");
+				System.out.println("Choose an option from the menu");
 		}
 		
 		return quit;
@@ -183,8 +186,6 @@ public class CashRegister {
 		return updated;
 	}
 	
-	
-	
 	public void showItems()
 	{	
 		printHeader("register items");
@@ -195,7 +196,8 @@ public class CashRegister {
 			}
 		} else {
 			System.out.println("< NO ITEMS >");
-		}	
+		}
+		System.out.println("-------------------------------------");
 	};
 	
 	public void clearRegister()
@@ -204,6 +206,7 @@ public class CashRegister {
 			incrementInventory(item.getItemNo(), item.getUnits());
 		}
 		selectedItems.clear();
+		System.out.println("\n[ REGISTER CLEARED ]");
 	};
 	
 	public void showInventory()
@@ -238,13 +241,6 @@ public class CashRegister {
 		
 		System.out.println(totals);
 	};
-	
-	private void getErrorMsg() {
-		System.out.println(errorMsg);
-	}
-	
-	private void setErrorMsg(String msg) {
-		this.errorMsg = "[ " + msg + " ]";
-	}
+
 	
 }
