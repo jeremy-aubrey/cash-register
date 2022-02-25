@@ -250,13 +250,17 @@ public class CashRegister {
 		
 		System.out.println(items);
 		System.out.println(totals);
-		printHeader("proceed ? y (yes) | any other key (no)");
+		printHeader("proceed ? y (yes) | n (no)");
 		String choice = userIn.nextLine().toUpperCase();
 		
 		if(choice.equals("Y")) {
 			String recieptData = items.concat("\n" + totals);
 			getReciept(recieptData);
-		} 
+		} else if(choice.equals("N")) {
+			clearRegister();
+		} else {
+			System.out.println("[ RETURNING TO MAIN MENU ]");
+		}
 	};
 	
 	private void getReciept(String receiptData) {
