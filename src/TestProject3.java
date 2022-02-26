@@ -1,4 +1,26 @@
-
+//******************************************************************************
+//
+//  Developer:     Jeremy Aubrey
+//
+//  Project #:     Project 2 
+//
+//  File Name:     ShapeTest.java
+//
+//  Course:        COSC 4301 - Modern Programming
+//
+//  Due Date:      2/20/2022
+//
+//  Instructor:    Fred Kumi 
+//
+//  Description:   This program displays the attributes of each shape type,
+//                 including type, dimension type, area, and volume if
+//                 applicable.
+//
+//                 You are allowed to modify only line 84. If you modify
+//                 any other part of the class, you will not receive credit
+//                 for this project.
+//
+//******************************************************************************
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,18 +47,21 @@ public class TestProject3 {
 		File inventoryFile = obj.getFile("inventory");
 		List<StoreItem> itemsList = obj.getItems(inventoryFile);
 		
-		CashRegister register = new CashRegister(itemsList);
+		File cashiersFile = obj.getFile("cashier");
+		List<String> cashierList = obj.getCashiers(cashiersFile);
+		
+		CashRegister register = new CashRegister(itemsList, cashierList);
 		
 		register.displayMenu();
 		
 		input.close();
 	}
 
-	public File getFile(String type) {
+	public File getFile(String label) {
 		
 		File file = null;
 		
-		System.out.println("Enter an " + type + " file path:");
+		System.out.println("\nEnter an " + label + " file path:");
 		Path path = null;
 	
 		//get legal path
@@ -53,8 +78,7 @@ public class TestProject3 {
 			} 
 			
 		} catch (InvalidPathException | SecurityException | NullPointerException e) {
-			System.out.println("Illegal path:");
-			System.out.println(e.getMessage());
+			System.out.println("[ ILLEGAL PATH ]: " + e.getMessage());
 		}
 		
 		return file;
@@ -63,13 +87,11 @@ public class TestProject3 {
 	public List<StoreItem> getItems(File inventoryFile) {
 		
 		List<StoreItem> itemList = new ArrayList<StoreItem>();
-		
-		try {
 			
-			BufferedReader reader = new BufferedReader(new FileReader(inventoryFile));
+		BufferedReader reader;
 			
 			try {
-				
+				reader = new BufferedReader(new FileReader(inventoryFile));
 				String line = reader.readLine();
 				while(line != null) {
 					String[] itemData = line.replaceAll("\\s+", ",").split(",");
@@ -90,16 +112,40 @@ public class TestProject3 {
 					reader.close();
 				}
 				
-			} catch (IOException | NumberFormatException e) {
+			} catch (IOException | NumberFormatException | NullPointerException e) {
 				System.out.print("[ ERROR READING FILE ]: " + e.getMessage() + "\n");
 				System.out.println("[ NO ITEMS UPLOADED ]");
 			}
-			
-		} catch (FileNotFoundException | NullPointerException e) {
-			System.out.print("[ FILE NOT FOUND ]\n");
-		}
 		
 		return itemList;
+	}
+	
+	private List<String> getCashiers(File cashiersFile) {
+		
+		BufferedReader reader = null;
+		List<String> cashierList = new ArrayList<String>();
+		
+		try {
+			reader = new BufferedReader(new FileReader(cashiersFile));
+			String line = reader.readLine();
+			while(line != null) {
+				cashierList.add(line);
+				line = reader.readLine();
+			}
+			System.out.println("[ " + cashierList.size() + " CASHIERS UPLOADED ]");
+			
+			if(reader != null) {
+				reader.close();
+			}
+			
+		} catch (IOException | InvalidPathException | NullPointerException e) {
+			
+			System.out.print("[ FILE NOT FOUND ]: " + e.getMessage() + "\n");
+			System.out.println("[ NO CASHIERS UPLOADED ]");
+		}
+		
+		return cashierList;
+
 	}
 	
    //***************************************************************
@@ -117,7 +163,7 @@ public class TestProject3 {
 	   
       System.out.println("Name:    Jeremy Aubrey");
       System.out.println("Course:  COSC 4301 Modern Programming");
-      System.out.println("Project: Three\n");
+      System.out.println("Project: Three");
 
    } // End of the developerInfo method
 }
