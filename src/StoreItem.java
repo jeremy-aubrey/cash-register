@@ -1,4 +1,20 @@
-
+//******************************************************************************
+//
+//  Developer:     Jeremy Aubrey
+//
+//  Project #:     Project 3 
+//
+//  File Name:     CashRegister.java
+//
+//  Course:        COSC 4301 - Modern Programming
+//
+//  Due Date:      2/27/2022
+//
+//  Instructor:    Fred Kumi 
+//
+//  Description:   A class that maintains data about a store item in inventory.
+//
+//******************************************************************************
 
 public class StoreItem {
 	
@@ -7,6 +23,7 @@ public class StoreItem {
 	private String itemDescription;
 	private double price;
 	
+	// constructor 
 	public StoreItem(int itemNo, String itemDescription, int units, double price) {
 		
 		//ensure non-negative item number
@@ -23,11 +40,21 @@ public class StoreItem {
 			this.price = 0.00;
 		}
 		
-		this.itemDescription = itemDescription;
+		//ensure non-negative units
+		if(units >= 0) {
+			this.units = units;
+		} else {
+			this.units = 0;
+		}
 		
-		//increment the class inventory count
-		this.units = units;
-	}
+		//ensure non-null description
+		if(itemDescription != null) {
+			this.itemDescription = itemDescription;
+		} else {
+			this.itemDescription = "(Missing description)";
+		}
+		
+	}// end constructor
 	
 	public int getUnits() {
 		return units;
@@ -59,6 +86,5 @@ public class StoreItem {
 			String.format("%.2f", getPrice()));
 		
 	}// end toString method
-	
 
-}
+}// end StoreItem class
