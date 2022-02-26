@@ -4,7 +4,7 @@
 //
 //  Project #:     Project 3 
 //
-//  File Name:     CashRegister.java
+//  File Name:     StoreItem.java
 //
 //  Course:        COSC 4301 - Modern Programming
 //
