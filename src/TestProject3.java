@@ -158,7 +158,7 @@ public class TestProject3 {
 		} catch (IOException | NumberFormatException | NullPointerException e) {
 			
 			System.out.print("[ ERROR READING FILE ]: " + e.getMessage() + "\n");
-			System.out.println("[ NO ITEMS UPLOADED ]");
+			System.out.println("[ " + itemList.size() + " ITEMS UPLOADED ]");
 		}
 		
 		return itemList;
@@ -203,7 +203,7 @@ public class TestProject3 {
 		} catch (IOException | InvalidPathException | NullPointerException e) {
 			
 			System.out.print("[ FILE NOT FOUND ]: " + e.getMessage() + "\n");
-			System.out.println("[ NO CASHIERS UPLOADED ]");
+			System.out.println("[ " + cashierList.size() + " CASHIERS UPLOADED ]");
 		}
 		
 		return cashierList;
