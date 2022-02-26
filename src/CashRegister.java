@@ -1,15 +1,8 @@
 
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,13 +16,15 @@ public class CashRegister {
 	
 	private List<StoreItem> selectedItems;
 	private List<StoreItem> inventoryList;
+	private List<String> cashierList;
 	private double taxRate = 0.0825;
 	private Scanner userIn = new Scanner(System.in);
 	
-	public CashRegister(List<StoreItem> inventoryList) 
+	public CashRegister(List<StoreItem> inventoryList, List<String> cashierList) 
 	{
 		selectedItems = new ArrayList<StoreItem>();
 		this.inventoryList = inventoryList; 
+		this.cashierList = cashierList;
 	}
 	
 	public void selectItems()
@@ -269,8 +264,9 @@ public class CashRegister {
 	};
 	
 	private void getReciept(String receiptData) {
-		//get receipt path
+		//receipt path
 		File receiptPath = new File("./Project3-Output.txt");
+		
 		if(receiptPath != null) {
 			//populate with data (write)
 			try {
@@ -297,57 +293,12 @@ public class CashRegister {
 	private String getRandomCashier() {
 			
 		String cashier = "";
-		List<String> cashiers = new ArrayList<String>();
 		
-		BufferedReader reader = null;
-		try {
-			String path = FileSystems.getDefault().getPath("Cashier.txt").toString();
-			reader = new BufferedReader(new FileReader(path));
-			String line = reader.readLine();
-			while(line != null) {
-				cashiers.add(line);
-				line = reader.readLine();
-			}
-			
-			cashier = cashiers.get(new Random().nextInt(cashiers.size()));
-			
-		} catch (IOException | InvalidPathException e) {
-			
-			e.printStackTrace();
+		if(!cashierList.isEmpty()) {
+			cashier = cashierList.get(new Random().nextInt(cashierList.size()));
 		}
-			return cashier;	
-	}
-
-	
-	public File getFile(String type) {
-		
-		File file = null;
-		
-		System.out.println("Enter an " + type + " file path:");
-		Path path = null;
-	
-		//get legal path
-		try {
-			path = Paths.get(userIn.nextLine().trim());
-			boolean exists = Files.exists(path);
 			
-			//instantiate File if its readable
-			if(!exists) {
-				file = new File(path.toString());
-				System.out.println("Using: " + path);
-			} else {
-				System.out.println("\n[ FILE EXISTS, USE ANOTHER PATH ]");
-			}
-			
-		} catch (InvalidPathException | SecurityException | NullPointerException e) {
-			System.out.print("\n[ ILLEGAL FILE PATH ]: ");
-			System.out.println(e.getMessage());
-		}
-		
-		return file;
+		return cashier;	
 	}
-	
-	
-
 	
 }
