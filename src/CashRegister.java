@@ -61,7 +61,7 @@ public class CashRegister {
     //  Returns:      N/A
     //
     //**************************************************************
-	public void selectItems()
+	private void selectItems()
 	{
 		boolean quit = false;
 		int selection = 0;
@@ -264,7 +264,7 @@ public class CashRegister {
     //  Returns:      String
     //
     //**************************************************************
-	public String getTotal() {
+	private String getTotal() {
 		
 		double total = 0.00;
 		DecimalFormat df = new DecimalFormat("0.00"); // format
@@ -293,7 +293,7 @@ public class CashRegister {
     //  Returns:      String
     //
     //**************************************************************
-	public void purchaseItem(StoreItem item, int quantity) {
+	private void purchaseItem(StoreItem item, int quantity) {
 		
 		if(item != null) { // if a valid item was selected
 			
@@ -393,7 +393,7 @@ public class CashRegister {
     //  Returns:      N/A
     //
     //**************************************************************
-	public void showItems() {
+	private void showItems() {
 		
 		// for readability
 		printHeader("register items");
@@ -426,7 +426,7 @@ public class CashRegister {
     //  Returns:      N/A
     //
     //**************************************************************
-	public void clearRegister() {
+	private void clearRegister() {
 		
 		for(StoreItem item : selectedItems) { // using internal register list
 			incrementInventory(item.getItemNo(), item.getUnits()); // re-stock main inventory
@@ -448,7 +448,7 @@ public class CashRegister {
     //  Returns:      N/A
     //
     //**************************************************************
-	public void showInventory() {
+	private void showInventory() {
 		
 		// for readability
 		printHeader("store inventory");
@@ -473,7 +473,7 @@ public class CashRegister {
     //  Returns:      N/A
     //
     //**************************************************************
-	public void checkOut() {
+	private void checkOut() {
 		
 		printHeader("checkout");
 		
