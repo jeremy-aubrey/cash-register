@@ -8,21 +8,21 @@ A cash register simulator that uses an interactive menu to allows users to:
 
 The program also generates a receipt file upon checkout.
 
-#### To Build:
+### To Build:
 Download the java source code and run the following command in the same directory:
 ```
 javac *.java
 ```
 ![Screenshot](docs/images/compile.png)
 
-#### Run:
+### Run:
 ```
 java CashRegisterDriver
 ```
 
 ![Screenshot](docs/images/start.png)
 
-#### Use:
+### Use:
 Upload inventory items and cashier data by providing the path to the source file:
 
 Inventory ([file format](src/Inventory.txt))
@@ -45,7 +45,7 @@ The main menu allows the user to navigate and perform the following actions:
 
 ---
 
-(show available inventory imported from file)
+(show available inventory imported from [file](src/Inventory.txt))
 ![Screenshot](docs/images/show-inventory.png)
 
 ---
