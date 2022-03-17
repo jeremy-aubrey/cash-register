@@ -13,3 +13,10 @@ Download the java source code and run the following command in the same director
 ```
 javac *.java
 ```
+
+#### Run:
+```
+java CashRegisterDriver
+```
+
+![Screenshot](docs/images/compile.png)
