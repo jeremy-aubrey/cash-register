@@ -13,10 +13,20 @@ Download the java source code and run the following command in the same director
 ```
 javac *.java
 ```
+![Screenshot](docs/images/compile.png)
 
 #### Run:
 ```
 java CashRegisterDriver
 ```
 
-![Screenshot](docs/images/compile.png)
+![Screenshot](docs/images/start.png)
+
+#### Use:
+Upload inventory items and cashier data by providing the path to the source file:
+
+Inventory ([file format](src/Inventory.txt))
+![Screenshot](docs/images/uploaded-inventory.png)
+
+Cashiers (Optional) ([file format](src/Cashier.txt))
+![Screenshot](docs/images/uploaded-cashiers.png)
