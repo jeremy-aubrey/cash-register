@@ -30,3 +30,30 @@ Inventory ([file format](src/Inventory.txt))
 
 Cashiers (Optional) ([file format](src/Cashier.txt))
 ![Screenshot](docs/images/uploaded-cashiers.png)
+
+#### Menu:
+The main menu allows the user to navigate and perform the following actions:
+
+- 1 Select Items
+- 2 Show Cash Register
+- 3 Clear Cash Register
+- 4 Show Inventory
+- 5 Check Out
+- 6 Quit
+
+![Screenshot](docs/images/menu-options.png)
+
+(show available inventory imported from file)
+![Screenshot](docs/images/show-inventory.png)
+
+(purchase an item)
+![Screenshot](docs/images/purchase.png)
+
+(show items added to register list for purchase)
+![Screenshot](docs/images/show-register.png)
+
+(checkout)
+![Screenshot](docs/images/checkout.png)
+
+Upon checkout a reciept file is generated
+![Screenshot](docs/images/reciept.png)
