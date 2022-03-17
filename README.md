@@ -10,13 +10,13 @@ The program also generates a receipt file upon checkout.
 
 ### To Build:
 Download the java source code and run the following command in the same directory:
-```
+```powershell
 javac *.java
 ```
 ![Screenshot](docs/images/compile.png)
 
 ### Run:
-```
+```powershell
 java CashRegisterDriver
 ```
 
