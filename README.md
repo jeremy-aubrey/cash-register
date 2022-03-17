@@ -42,19 +42,18 @@ The main menu allows the user to navigate and perform the following actions:
 - 6 Quit
 
 ![Screenshot](docs/images/menu-options.png)
-
+---
 (show available inventory imported from file)
 ![Screenshot](docs/images/show-inventory.png)
-
+---
 (purchase an item)
 ![Screenshot](docs/images/purchase.png)
-
+---
 (show items added to register list for purchase)
 ![Screenshot](docs/images/show-register.png)
-
-
+---
 (checkout)
 ![Screenshot](docs/images/checkout.png)
-
+---
 Upon checkout a reciept file is generated
 ![Screenshot](docs/images/reciept.png)
