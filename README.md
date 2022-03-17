@@ -60,7 +60,7 @@ The main menu allows the user to navigate and perform the following actions:
 
 ---
 
-(checkout)
+(check out) 
 ![Screenshot](docs/images/checkout.png)
 
 ---
