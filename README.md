@@ -60,7 +60,7 @@ The main menu allows the user to navigate and perform the following actions:
 
 ---
 
-(check out) 
+(check out with current register items) 
 ![Screenshot](docs/images/checkout.png)
 
 ---
