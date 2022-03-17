@@ -52,6 +52,7 @@ The main menu allows the user to navigate and perform the following actions:
 (show items added to register list for purchase)
 ![Screenshot](docs/images/show-register.png)
 
+
 (checkout)
 ![Screenshot](docs/images/checkout.png)
 
