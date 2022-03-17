@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TestProject3 {
+public class CashRegisterDriver {
 	
 	private static Scanner input = new Scanner(System.in);
 	
@@ -47,7 +47,7 @@ public class TestProject3 {
    //***************************************************************
 	public static void main(String[] args) {
 		
-		TestProject3 obj = new TestProject3();
+		CashRegisterDriver obj = new CashRegisterDriver();
 		obj.developerInfo();
 		
 		// user provides a path to an item inventory file
