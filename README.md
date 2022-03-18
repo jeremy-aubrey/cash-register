@@ -65,5 +65,8 @@ The main menu allows the user to navigate and perform the following actions:
 
 ---
 
-Upon checkout a reciept file is generated
+Upon checkout a receipt file is generated
 ![Screenshot](docs/images/reciept.png)
+
+(Sample receipt file)
+![Screenshot](docs/images/sample-receipt.png)
